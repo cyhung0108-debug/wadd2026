@@ -3,6 +3,37 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+    <context-param>
+        <param-name>title</param-name>
+        <param-value>Vistor Counter Site</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>myServlet1</servlet-name>
+        <jsp-file>/WEB-INF/jsp/visit.jsp</jsp-file>
+        <init-param>
+            <param-name>title</param-name>
+            <param-value>Page for myServlet1</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>myServlet1</servlet-name>
+        <url-pattern>/visit1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>myServlet2</servlet-name>
+        <jsp-file>/WEB-INF/jsp/visit.jsp</jsp-file>
+        <init-param>
+            <param-name>title</param-name>
+            <param-value>Page for myServlet2</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>myServlet2</servlet-name>
+        <url-pattern>/visit2</url-pattern>
+    </servlet-mapping>
+
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
