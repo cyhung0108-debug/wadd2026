@@ -11,6 +11,7 @@ repositories {
 }
 
 ext {
+    springVersion = '6.2.3'
     junitVersion = '5.10.2'
 }
 
@@ -27,6 +28,7 @@ dependencies {
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
     implementation 'jakarta.el:jakarta.el-api:5.0.0'
+    implementation "org.springframework:spring-webmvc:${springVersion}"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
