@@ -1,10 +1,12 @@
 package hkmu.wadd.controller;
 
 import hkmu.wadd.dao.UserManagementService;
+import hkmu.wadd.validator.UserValidator;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,9 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/user")
 public class UserManagementController {
+    @Autowired
+    private UserValidator userValidator;
+
     @Resource
     UserManagementService umService;
 
@@ -79,6 +84,8 @@ public class UserManagementController {
     @PostMapping("/create")
     public String create(@ModelAttribute("ticketUser") @Valid Form form, BindingResult result)
             throws IOException {
+        userValidator.validate(form, result);
+
         if (result.hasErrors()) {
             return "addUser";
         }
@@ -87,7 +94,7 @@ public class UserManagementController {
                 form.getPassword(), form.getRoles());
         return "redirect:/user/list";
     }
-    
+
     @GetMapping("/delete/{username}")
     public String deleteTicket(@PathVariable("username") String username) {
         umService.delete(username);
