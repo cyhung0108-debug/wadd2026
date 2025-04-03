@@ -6,6 +6,8 @@ import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +20,8 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/user")
 public class UserManagementController {
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     @Autowired
     private UserValidator userValidator;
 
@@ -92,12 +96,14 @@ public class UserManagementController {
 
         umService.createTicketUser(form.getUsername(),
                 form.getPassword(), form.getRoles());
+        logger.info("User {} created.", form.getUsername());
         return "redirect:/user/list";
     }
 
     @GetMapping("/delete/{username}")
     public String deleteTicket(@PathVariable("username") String username) {
         umService.delete(username);
+        logger.info("User {} deleted.", username);
         return "redirect:/user/list";
     }
 }
